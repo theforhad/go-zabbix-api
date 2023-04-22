@@ -69,15 +69,9 @@ func (api *API) HttpTestCreate(httptests HttpTests) (err error) {
 		return
 	}
 
-	log.Println("HELLOOOOO")
-	//log.Trace("Creating RESULT!!!!!!!!!!!!!!!!!!!!")
-	//logger.Trace("Creating RESULT!!!!!!!!!!!!!!!!!!!!")
 	result := response.Result.(map[string]interface{})
-	log.Println("HELLOOOOO RESULT")
-	log.Println(result)
 	httptestids := result["httptestids"].([]interface{})
-	//httptestids := result["httptestids"].([]string)
-	log.Println("HELLOOOOO LOOP")
+	
 	for i, id := range httptestids {
 		httptests[i].HttpTestId = id.(string)
 	}
