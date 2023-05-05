@@ -3,8 +3,8 @@ package zabbix
 import (
 	"log"
 )
-// Template represent Zabbix Template type returned from Zabbix API
-// https://www.zabbix.com/documentation/3.2/manual/api/reference/template/object
+// httptest represent Zabbix httptest type returned from Zabbix API
+// https://www.zabbix.com/documentation/3.2/en/manual/api/reference/httptest/object
 type HttpTest struct {
 	HttpTestId      string       `json:"httptestid,omitempty"`
 	HostId          string       `json:"hostid,omitempty"`
@@ -35,7 +35,7 @@ type Steps []Step
 // Templates is an Array of Template structs.
 type HttpTests []HttpTest
 
-// HttpTestGet Wrapper for template.get
+// HttpTestGet Wrapper for httptest.get
 // https://www.zabbix.com/documentation/current/en/manual/api/reference/httptest/object
 func (api *API) HttpTestGet(params Params) (res HttpTests, err error) {
 	if _, present := params["output"]; !present {
@@ -62,7 +62,7 @@ func (api *API) HttpTestGetByID(id string) (httptest *HttpTest, err error) {
 }
 
 // HttpTestCreate Wrapper for httptest.create
-// https://www.zabbix.com/documentation/3.2/manual/api/reference/template/create
+// https://www.zabbix.com/documentation/3.2/en/manual/api/reference/httptest/create
 func (api *API) HttpTestCreate(httptests HttpTests) (err error) {
 	response, err := api.CallWithError("httptest.create", httptests)
 	if err != nil {
@@ -78,16 +78,15 @@ func (api *API) HttpTestCreate(httptests HttpTests) (err error) {
 	return
 }
 
-// HttpTestUpdate Wrapper for template.update
-// https://www.zabbix.com/documentation/3.2/manual/api/reference/template/update
+// HttpTestUpdate Wrapper for httptest.update
+// https://www.zabbix.com/documentation/3.2/manual/api/reference/httptest/update
 func (api *API) HttpTestUpdate(httptests HttpTests) (err error) {
 	_, err = api.CallWithError("httptest.update", httptests)
 	return
 }
 
-// HttpTestDelete Wrapper for template.delete
-// Cleans ApplicationID in all apps elements if call succeed.
-// https://www.zabbix.com/documentation/3.2/manual/api/reference/template/delete
+// HttpTestDelete Wrapper for httptest.delete
+// https://www.zabbix.com/documentation/3.2/manual/api/reference/httptest/delete
 func (api *API) HttpTestDelete(httptests HttpTests) (err error) {
 	httptestids := make([]string, len(httptests))
 	for i, httptest := range httptests {
@@ -103,9 +102,9 @@ func (api *API) HttpTestDelete(httptests HttpTests) (err error) {
 	return
 }
 
-// HttpTestDeleteByIds Wrapper for template.delete
-// Use template's id to delete the template
-// https://www.zabbix.com/documentation/3.2/manual/api/reference/template/delete
+// HttpTestDeleteByIds Wrapper for httptest.delete
+// Use httptest's id to delete the httptest
+// https://www.zabbix.com/documentation/3.2/manual/api/reference/httptest/delete
 func (api *API) HttpTestDeleteByIds(ids []string) (err error) {
 	response, err := api.CallWithError("httptest.delete", ids)
 	if err != nil {
