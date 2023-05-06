@@ -1,8 +1,5 @@
 package zabbix
 
-import (
-	"log"
-)
 // httptest represent Zabbix httptest type returned from Zabbix API
 // https://www.zabbix.com/documentation/3.2/en/manual/api/reference/httptest/object
 type HttpTest struct {
